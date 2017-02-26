@@ -2,6 +2,24 @@ import sys
 import argparse
 import urllib.request
 
+# create a led box of n size
+def create_board(led_box_len):
+	"""Creates a board with a parsed size"""
+	return False
+def clean_up_input_file(commands):
+	"""Cleans up input file and returns usable values"""
+
+	return False
+
+def board_plotter(final_data, board):
+	"""Cycles the board and turns on, off or switches lights"""
+	return False
+
+def print_lights_totals(result):
+	"""Prints to the number of on lights"""
+	return False
+
+
 def read_from_file():
 	"""Pull data from a link"""
 	parser = argparse.ArgumentParser()
@@ -12,14 +30,18 @@ def read_from_file():
 	req = urllib.request.urlopen(uri)
 	data = req.read().decode('utf-8')
 
-	for line in data:
-		line_values = line.strip()
-		print(line_values,end="")
+	led_box_len = int(data.splitlines()[0])
+
+	board = (create_board(led_box_len))
+
+	commands = data.splitlines()[1:]
+
+	final_data = clean_up_input_file(commands)
+
+	result = board_plotter(final_data, board)
+	print(print_lights_totals(result))
 
 
-
-# def create_board(board_size):
-# 	return [[False] * board_size for _ in range(board_size)]
 
 def main():
 	read_from_file()
