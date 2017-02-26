@@ -5,7 +5,8 @@ import urllib.request
 # create a led box of n size
 def create_board(led_box_len):
 	"""Creates a board with a parsed size"""
-	return False
+	return [[False] * led_box_len for _ in range(led_box_len)]
+
 def clean_up_input_file(commands):
 	"""Cleans up input file and returns usable values"""
 
