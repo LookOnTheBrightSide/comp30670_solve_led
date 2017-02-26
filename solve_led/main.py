@@ -10,15 +10,52 @@ def create_board(led_box_len):
 def clean_up_input_file(commands):
 	"""Cleans up input file and returns usable values"""
 
-	return False
+	final_data = []
+	for i in range(len(commands)):
+		each_line = commands[i].split(" ")
+		for item in each_line:
+			if item == "turn" or item == "through":
+				each_line.remove(item)
+
+		row_start = each_line[1]
+		row_end = each_line[2]
+		first = row_start.split(',')
+		second = row_end.split(',')
+		action = each_line[0]
+		final_data.append([action, int(first[0]),int(first[1]),int(second[0]),int(second[1])])
+
+	return final_data
 
 def board_plotter(final_data, board):
 	"""Cycles the board and turns on, off or switches lights"""
-	return False
+
+	for i in range(len(final_data)):
+		if final_data[i][0] == "on":
+			for r in range(len(board)):
+				for c in range(len(board)):
+					if (r >= final_data[i][1] and r <= final_data[i][3] and c >= final_data[i][2] and c <= final_data[i][4]):
+						board[r][c] = True
+
+		elif final_data[i][0] == "off":
+			for r in range(len(board)):
+				for c in range(len(board)):
+					if (r >= final_data[i][1] and r <= final_data[i][3] and c >= final_data[i][2] and c <= final_data[i][4]):
+						board[r][c] = False
+
+		elif final_data[i][0] == "switch":
+			for r in range(len(board)):
+				for c in range(len(board)):
+					if (r >= final_data[i][1] and r <= final_data[i][3] and c >= final_data[i][2] and c <= final_data[i][4]):
+						if board[r][c] == True:
+							board[r][c] = False
+						else:
+							board[r][c] = True
+	return board
 
 def print_lights_totals(result):
 	"""Prints to the number of on lights"""
-	return False
+	return ("On count is : ", sum(x.count(True) for x in result))
+
 
 
 def read_from_file():
