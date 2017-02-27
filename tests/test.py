@@ -28,5 +28,12 @@ def test_print_lights_totals():
 	eq_(print_lights_totals([[False, True],[True, False]]), ('On count is : ', 2))
 	eq_(print_lights_totals([[True, True],[True, False]]), ('On count is : ', 3))
 
+def test_check_for_outliers():
+	eq_(check_for_outliers([3,3,3,3], -10), 0)
+	eq_(check_for_outliers([20,3,3,3,0,3],30), 6)
+	eq_(check_for_outliers([10,3,3,3,3,3,3], -11), 0)
+
+
+
 def test_version():
 	eq_(sys.version_info[0], 3, "Python is not in version 3")

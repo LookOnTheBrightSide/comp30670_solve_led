@@ -7,6 +7,19 @@ def create_board(led_box_len):
 	"""Creates a board with a parsed size"""
 	return [[False] * led_box_len for _ in range(led_box_len)]
 
+def check_for_outliers(board_size, plot_point):
+	"""Checks if the point is less than the grid size
+	if it is less than the girid size, set the point to 0
+	if the point is greater than the grid size, set it to the grid's max value
+	"""
+	board_size = len(board_size)
+	if plot_point > board_size:
+		plot_point = board_size
+	elif plot_point < 0:
+		plot_point = 0
+	return plot_point
+
+
 def clean_up_input_file(commands):
 	"""Cleans up input file and returns usable values"""
 
@@ -33,19 +46,19 @@ def board_plotter(final_data, board):
 		if final_data[i][0] == "on":
 			for r in range(len(board)):
 				for c in range(len(board)):
-					if (r >= final_data[i][1] and r <= final_data[i][3] and c >= final_data[i][2] and c <= final_data[i][4]):
+					if (r >= check_for_outliers(board,int(final_data[i][1])) and r <= check_for_outliers(board,int(final_data[i][3])) and c >= check_for_outliers(board,int(final_data[i][2])) and c <= check_for_outliers(board,int(final_data[i][4]))):
 						board[r][c] = True
 
 		elif final_data[i][0] == "off":
 			for r in range(len(board)):
 				for c in range(len(board)):
-					if (r >= final_data[i][1] and r <= final_data[i][3] and c >= final_data[i][2] and c <= final_data[i][4]):
+					if (r >= check_for_outliers(board,int(final_data[i][1])) and r <= check_for_outliers(board,int(final_data[i][3])) and c >= check_for_outliers(board,int(final_data[i][2])) and c <= check_for_outliers(board,int(final_data[i][4]))):
 						board[r][c] = False
 
 		elif final_data[i][0] == "switch":
 			for r in range(len(board)):
 				for c in range(len(board)):
-					if (r >= final_data[i][1] and r <= final_data[i][3] and c >= final_data[i][2] and c <= final_data[i][4]):
+					if (r >= check_for_outliers(board,int(final_data[i][1])) and r <= check_for_outliers(board,int(final_data[i][3])) and c >= check_for_outliers(board,int(final_data[i][2])) and c <= check_for_outliers(board,int(final_data[i][4]))):
 						if board[r][c] == True:
 							board[r][c] = False
 						else:
