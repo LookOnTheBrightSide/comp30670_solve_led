@@ -14,7 +14,7 @@ def check_for_outliers(board_size, plot_point):
 	"""
 	board_size = len(board_size)
 	if plot_point > board_size:
-		plot_point = board_size
+		plot_point = board_size - 1
 	elif plot_point < 0:
 		plot_point = 0
 	return plot_point
@@ -27,7 +27,7 @@ def clean_up_input_file(commands):
 	for i in range(len(commands)):
 		each_line = commands[i].split(" ")
 		for item in each_line:
-			if item == "turn" or item == "through":
+			if item == "turn" or item == "through" or item ==" ":
 				each_line.remove(item)
 
 		row_start = each_line[1]
@@ -57,6 +57,9 @@ def board_plotter(final_data, board):
 						board[r][c] = False
 					else:
 						board[r][c] = True
+				else:
+					raise ValueError('invalid action found : {}'.format(final_data[i][0]))
+					continue
 
 	return board
 
