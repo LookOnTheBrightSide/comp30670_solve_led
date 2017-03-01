@@ -43,22 +43,20 @@ def board_plotter(final_data, board):
 	"""Cycles the board and turns on, off or switches lights"""
 
 	for i in range(len(final_data)):
-		for r in range(len(board)):
-			for c in range(len(board)):
+		for r in range(check_for_outliers(board,final_data[i][1]),check_for_outliers(board,final_data[i][3]) + 1):
+			for c in range(check_for_outliers(board,final_data[i][2]), check_for_outliers(board,final_data[i][4]) + 1):
+
 				if final_data[i][0] == "on":
-					if (r >= check_for_outliers(board,int(final_data[i][1])) and r <= check_for_outliers(board,int(final_data[i][3])) and c >= check_for_outliers(board,int(final_data[i][2])) and c <= check_for_outliers(board,int(final_data[i][4]))):
-						board[r][c] = True
+					board[r][c] = True
 
 				elif final_data[i][0] == "off":
-					if (r >= check_for_outliers(board,int(final_data[i][1])) and r <= check_for_outliers(board,int(final_data[i][3])) and c >= check_for_outliers(board,int(final_data[i][2])) and c <= check_for_outliers(board,int(final_data[i][4]))):
-						board[r][c] = False
+					board[r][c] = False
 
 				elif final_data[i][0] == "switch":
-					if (r >= check_for_outliers(board,int(final_data[i][1])) and r <= check_for_outliers(board,int(final_data[i][3])) and c >= check_for_outliers(board,int(final_data[i][2])) and c <= check_for_outliers(board,int(final_data[i][4]))):
-						if board[r][c] == True:
-							board[r][c] = False
-						else:
-							board[r][c] = True
+					if board[r][c] == True:
+						board[r][c] = False
+					else:
+						board[r][c] = True
 
 	return board
 
