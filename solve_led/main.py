@@ -58,7 +58,7 @@ def board_plotter(final_data, board):
 					else:
 						board[r][c] = True
 				else:
-					raise ValueError('invalid action found : {}'.format(final_data[i][0]))
+					print("skipping unknown action")
 					continue
 
 	return board
