@@ -72,7 +72,7 @@ def print_lights_totals(result):
 def read_from_file():
 	"""Pull data from a link"""
 	parser = argparse.ArgumentParser()
-	parser.add_argument("--input", help="you need to parse a link to a file")
+	parser.add_argument("--input", required=True,help="you need to parse a link to a file with instructions, please see the docs")
 	args = (parser.parse_args())
 
 	uri = str(args.input)
