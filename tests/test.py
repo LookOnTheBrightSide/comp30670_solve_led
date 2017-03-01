@@ -19,9 +19,9 @@ def test_clean_up_input_file():
 	eq_(clean_up_input_file(['turn off 660,300 through 400,500', 'turn off 500,222 through 333,555']), [["off",660,300,400,500],["off",500,222,333,555]])
 
 def test_board_plotter():
-	eq_(board_plotter([['on', 0, 0, 2, 2]], [[False, False],[False, False]]), [[True, True],[True, True]])
-	eq_(board_plotter([['off', 0, 0, 2, 2]], [[True, True],[True, True]]), [[False, False],[False, False]])
-	eq_(board_plotter([['switch', 0, 0, 2, 2]], [[False, True],[True, False]]), [[True, False],[False, True]])
+	eq_(board_plotter([['on', 0, 0, 1, 1]], [[False, False],[False, False]]), [[True, True],[True, True]])
+	eq_(board_plotter([['off', 0, 0, 1, 1]], [[True, True],[True, True]]), [[False, False],[False, False]])
+	eq_(board_plotter([['switch', 0, 0, 1, 1]], [[False, True],[True, False]]), [[True, False],[False, True]])
 
 def test_print_lights_totals():
 	eq_(print_lights_totals([[False, False],[False, False]]), ('On count is : ', 0))
