@@ -22,7 +22,6 @@ def check_for_outliers(board_size, plot_point):
 
 def clean_up_input_file(commands):
 	"""Cleans up input file and returns usable values"""
-
 	final_data = []
 	for i in range(len(commands)):
 		each_line = commands[i].split(" ")
@@ -72,21 +71,22 @@ def print_lights_totals(result):
 def read_from_file():
 	"""Pull data from a link"""
 	parser = argparse.ArgumentParser()
+	# command cannot be executed without a path
 	parser.add_argument("--input", required=True,help="you need to parse a link to a file with instructions, please see the docs")
 	args = (parser.parse_args())
 
 	uri = str(args.input)
 	req = urllib.request.urlopen(uri)
 	data = req.read().decode('utf-8')
-
+	# first line is the size of the led board
 	led_box_len = int(data.splitlines()[0])
-
+	# create new board
 	board = (create_board(led_box_len))
-
+	# the actions are the rest of the file
 	commands = data.splitlines()[1:]
-
+	# cleaned up data
 	final_data = clean_up_input_file(commands)
-
+	# perform  actions on the board
 	result = board_plotter(final_data, board)
 	print(print_lights_totals(result))
 
